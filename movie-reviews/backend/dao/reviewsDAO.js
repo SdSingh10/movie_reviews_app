@@ -24,7 +24,7 @@ conn.db(process.env.MOVIEREVIEWS_NS).collection('reviews')
             user_id: user._id,
             date: date,
             review: review,
-            movie_id: ObjectId(movieId)
+            movie_id: new ObjectId(movieID)
            }
            return await reviews.insertOne(reviewDoc)
         }
@@ -37,7 +37,7 @@ conn.db(process.env.MOVIEREVIEWS_NS).collection('reviews')
     static async updateReview(review_id, userId, review, date){
         try{
             const updateResponse = await reviews.updateOne(
-                {user_id: userId, _id: ObjectId(reviewId)},
+                {user_id: userId, _id: new ObjectId(review_id)},
                 {$set:{review:review, date: date}}
             )
             return updateResponse
@@ -51,7 +51,7 @@ conn.db(process.env.MOVIEREVIEWS_NS).collection('reviews')
     static async deleteReview(reviewId, userId){
         try{
             const deleteResponse = await reviews.deleteOne({
-                _id: ObjectId(reviewId),
+                _id: new ObjectId(reviewId),
                 user_id: userId,
             })
             return deleteResponse
