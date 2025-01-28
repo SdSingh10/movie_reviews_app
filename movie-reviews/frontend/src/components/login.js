@@ -50,7 +50,7 @@ const Login = props => {
                       value={id}
                       onChange={onChangeId}/>
                 </Form.Group>
-                <Button variant="primary" onClick={login}></Button>
+                <Button variant="primary" onClick={login}>Login</Button>
             </Form>
         </div>
     )
