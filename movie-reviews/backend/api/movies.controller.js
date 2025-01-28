@@ -1,4 +1,6 @@
 import MoviesDAO from "../dao/moviesDAO.js";
+import { ObjectId } from "mongodb";
+
 
 export default class MoviesController{
 
@@ -29,6 +31,10 @@ export default class MoviesController{
     static async apiGetMovieById(req, res, next){
         try{
             let id = req.params.id || {}
+            if (!ObjectId.isValid(id)) {
+                res.status(400).json({ error: "Invalid movie ID format" });
+                return;
+            }
             let movie = await MoviesDAO.getMovieById(id)
             if(!movie){
                 res.status(404).json({error: "not found"})

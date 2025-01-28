@@ -34,12 +34,14 @@ conn.db(process.env.MOVIEREVIEWS_NS).collection('reviews')
         }
     }
 
-    static async updateReview(review_id, userId, review, date){
+    static async updateReview(reviewId, userId, review, date){
         try{
+            // console.log("Updating review with ID:", reviewId);
             const updateResponse = await reviews.updateOne(
-                {user_id: userId, _id: new ObjectId(review_id)},
+                {user_id: userId, _id: new ObjectId(reviewId)},
                 {$set:{review:review, date: date}}
             )
+            // console.log("Update Response:", updateResponse);
             return updateResponse
         }
         catch(e){
